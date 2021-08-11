@@ -10,6 +10,7 @@ import (
 	"message_board/utils/cookies"
 	"message_board/utils/queries"
 	"net/http"
+	"os"
 )
 
 var db *sql.DB
@@ -20,6 +21,12 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	logFile, err := os.OpenFile("./logs.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.SetOutput(logFile)
+	log.SetFlags(log.Lshortfile | log.LstdFlags)
 }
 
 func main() {
@@ -186,7 +193,7 @@ func login(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(500)
 		return
 	}
-	rw.Header().Add("set-cookie", "login=" + loginCookie)
+	rw.Header().Add("set-cookie", "login="+loginCookie)
 	err = tmpl.Execute(rw, "")
 	if err != nil {
 		log.Println("error when execute template:", err)
@@ -244,7 +251,7 @@ func register(rw http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println("error when update login cookie:", err)
 		}
-		rw.Header().Add("set-cookie", "login=" + loginCookie)
+		rw.Header().Add("set-cookie", "login="+loginCookie)
 	}
 
 	tmpl, err = template.ParseFiles(
