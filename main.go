@@ -5,12 +5,14 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"html/template"
 	"log"
+	"math/rand"
 	"message_board/helpers/error_handlers"
 	"message_board/utils/checkers"
 	"message_board/utils/cookies"
 	"message_board/utils/queries"
 	"net/http"
 	"os"
+	"time"
 )
 
 var db *sql.DB
@@ -21,12 +23,15 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	logFile, err := os.OpenFile("./logs.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
 	log.SetOutput(logFile)
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
+
+	rand.Seed(time.Now().Unix())
 }
 
 func main() {
