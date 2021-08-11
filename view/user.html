@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/user.css">
+    <script type="text/javascript" src="/static/javascript/user.js"></script>
+</head>
+<body>
+{{template "header.html"}}
+<script>
+    load_user_info();
+</script>
+<main>
+    <table class="user-table">
+        <tr>
+            <td style="width: 200px;">
+                <div class="user-info-text">
+                    用户名：
+                </div>
+            </td>
+            <td>
+                <div class="user-info-text" id="user-info-name">
+                    NULL
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="user-info-text">
+                    权限：
+                </div>
+            </td>
+            <td>
+                <div class="user-info-text" id="user-info-power">
+                    NULL
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="user-info-logout" onclick="logout()">登出</button>
+            </td>
+        </tr>
+    </table>
+</main>
+{{template "footer.html"}}
+</body>
+</html>

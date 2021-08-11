@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>用户注册</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+  <script type="text/javascript" src="/static/javascript/register.js"></script>
+</head>
+<body>
+{{template "header.html"}}
+<main class="login">
+  <form action="/register" method="post">
+    <table class="login-table">
+      <tr><td>
+          <div class="login-div">
+            <label>
+              <input class="login-input" type="text" id="register-name"
+                     onblur="check_name()"
+                     maxlength="40" required="required" name="name" placeholder="用户名"/>
+            </label>
+          </div>
+      </td></tr>
+      <tr><td>
+        <div class="login-div">
+          <div id="register-name-alarm" class="register-alarm">
+            用户名已存在
+          </div>
+        </div>
+      </td></tr>
+      <tr><td>
+          <div class="login-div">
+            <label>
+              <input class="login-input" id="register-pass1" type="password"
+                     onkeyup="check_pass1()" onmouseup="check_pass1()"
+                     maxlength="30" required="required" name="pass" placeholder="密码"/>
+            </label>
+          </div>
+      </td></tr>
+      <tr><td>
+        <div class="login-div">
+          <div id="register-pass1-alarm" class="register-alarm">
+            密码长度 6 - 20 位
+          </div>
+        </div>
+      </td></tr>
+      <tr><td>
+          <div class="login-div">
+            <label>
+              <input class="login-input" id="register-pass2" type="password"
+                     onkeyup="check_pass2()" onmouseup="check_pass2()"
+                     maxlength="30" required="required" name="pass2" placeholder="再次输入密码"/>
+            </label>
+          </div>
+      </td></tr>
+      <tr><td>
+        <div class="login-div">
+          <div id="register-pass2-alarm" class="register-alarm">
+            两次输入不一致
+          </div>
+        </div>
+      </td></tr>
+      <tr><td>
+        <div class="login-div">
+          <button class="login-button" id="register-button" type="submit" onclick="check_name()">注册</button>
+        </div>
+      </td></tr>
+    </table>
+  </form>
+</main>
+{{template "footer.html"}}
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>用户注册</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+</head>
+<body>
+{{template "header.html"}}
+<main class="login">
+  <form action="/register" method="post">
+    <table class="login-table">
+      <tr><td>
+        <div class="login-div">
+          <div id="register-name-alarm" class="register-alarm" style="color:green;display: inline;">
+            注册成功
+          </div>
+        </div>
+      </td></tr>
+    </table>
+  </form>
+</main>
+{{template "footer.html"}}
+</body>
+</html>

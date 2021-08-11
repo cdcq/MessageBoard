@@ -1,0 +1,20 @@
+
+.examine-access-button {
+    height: 40px;
+    width: 80px;
+    margin: 20px 0 0 10px;
+    float: right;
+    font-size: 20px;
+}
+
+.examine-content {
+    width: 820px;
+    height: fit-content;
+    margin: 10px;
+    padding: 10px 10px 10px 10px;
+    float: left;
+    font-size: 20px;
+    line-height: 40px;
+    word-break: break-all;
+    border: solid gray;
+}

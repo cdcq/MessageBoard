@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>留言版</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/watch.css">
+    <script type="text/javascript" src="/static/javascript/watch.js"></script>
+</head>
+<body>
+{{template "header.html"}}
+<script>
+    display_messages(1)
+</script>
+<table class="messages-table" id="messages-table">
+</table>
+<div class="watch-page-choice" id="pages-div">
+</div>
+{{template "footer.html"}}
+</body>
+</html>

@@ -1,0 +1,31 @@
+
+.write-table {
+    padding: 30px 30px 30px 30px;
+    margin: 50px auto 0 auto;
+    line-height: 65px;
+}
+
+.write-textarea {
+    width: 600px;
+    height: 200px;
+    font-size: 20px;
+}
+
+.write-alarm {
+    float: right;
+    font-size: 20px;
+    color: gray;
+}
+
+.write-submit {
+    height: 40px;
+    width: 80px;
+    font-size: 20px;
+}
+
+.write-success {
+    width: fit-content;
+    float: left;
+    font-size: 20px;
+    color: green;
+}

@@ -1,0 +1,60 @@
+
+.manage-search-user {
+    width: 900px;
+    margin: 30px auto 0 auto;
+}
+
+.manage-search-user-text {
+    font-size: 20px;
+    margin: 0 10px 0 0;
+}
+
+.manage-search-user-input {
+    height: 40px;
+    width: 300px;
+    margin: 0 10px 0 0;
+    font-size: 20px;
+}
+
+.manage-search-user-button {
+    height: 40px;
+    width: 80px;
+    margin: 0 10px 0 0;
+    font-size: 20px;
+}
+
+.users-table {
+    width: 900px;
+    margin: 30px auto 0 auto;
+    line-height: 40px;
+}
+
+.user-name {
+    max-width: 600px;
+    float: left;
+    margin: 0 20px;
+    font-size: 20px;
+    word-break: break-all;
+}
+
+.user-power {
+    width: 100px;
+    float: left;
+    font-size: 20px;
+    word-break: break-all;
+}
+
+.user-power-select {
+    height: 40px;
+    width: 130px;
+    float: right;
+    font-size: 20px;
+}
+
+.user-select-button {
+    height: 40px;
+    width: 80px;
+    margin: 0 20px;
+    float: right;
+    font-size: 20px;
+}

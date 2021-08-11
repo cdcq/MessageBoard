@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+</head>
+<body>
+{{template "header.html"}}
+<main class="login">
+    <form action="/login" method="post">
+        <table class="login-table">
+            <tr><td>
+            <div class="login-div">
+                <div id="login-failed-alarm" class="login-alarm">
+                    {{.}}
+                </div>
+            </div>
+            </td></tr>
+            <tr><td>
+                <div class="login-div">
+                    <label>
+                        <input class="login-input" type="text" required="required"
+                               maxlength="40" name="name" placeholder="用户名"/>
+                    </label>
+                </div>
+            </td></tr>
+            <tr><td>
+                <div class="login-div">
+                    <label>
+                        <input class="login-input" type="password" required="required"
+                               maxlength="30" name="pass" placeholder="密码"/>
+                    </label>
+                </div>
+            </td></tr>
+            <tr><td>
+                <div class="login-div">
+                    <button class="login-button" type="submit">登录</button>
+                </div>
+            </td></tr>
+        </table>
+    </form>
+</main>
+{{template "footer.html"}}
+</body>
+</html>

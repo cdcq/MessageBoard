@@ -1,0 +1,44 @@
+
+.messages-table {
+    margin: 30px auto 0 auto;
+    line-height: 40px;
+}
+
+.watch-name {
+    max-width: 600px;
+    float: left;
+    font-size: 25px;
+    word-break: break-all;
+}
+
+.watch-time {
+    max-width: 200px;
+    float: right;
+    margin: 0 15px;
+    font-size: 20px;
+    color: gray;
+    word-break: break-all;
+}
+
+.watch-content {
+    width: 900px;
+    height: fit-content;
+    margin: 10px;
+    padding: 10px 10px 10px 10px;
+    font-size: 20px;
+    line-height: 40px;
+    word-break: break-all;
+    border: solid gray;
+}
+
+.watch-page-choice {
+    width: fit-content;
+    margin: 30px auto 0 auto;
+}
+
+.watch-page-choice-a {
+    margin: 0 5px;
+    padding: 0 5px 0 5px;
+    font-size: 30px;
+    color: black;
+}

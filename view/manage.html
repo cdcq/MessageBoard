@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/manage.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/watch.css">
+    <script type="text/javascript" src="/static/javascript/manage.js"></script>
+    <script type="text/javascript" src="/static/javascript/watch.js"></script>
+</head>
+<body>
+{{template "header.html"}}
+<script>
+    check_login()
+    display_lower_power_users(1)
+</script>
+<div class="manage-search-user">
+    <label class="manage-search-user-text">
+        查找用户
+    </label>
+    <label>
+        <input class="manage-search-user-input" id="search-user-input" placeholder="用户名">
+    </label>
+    <button class="manage-search-user-button" onclick="find_user_name()">查找</button>
+</div>
+<table class="users-table" id="users-table">
+</table>
+<div class="watch-page-choice" id="pages-div">
+</div>
+{{template "footer.html"}}
+</body>
+</html>

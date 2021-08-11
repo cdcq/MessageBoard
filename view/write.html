@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>写留言</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/write.css">
+    <script type="text/javascript" src="/static/javascript/write.js"></script>
+</head>
+<body>
+{{template "header.html"}}
+<script>
+    goto_login()
+</script>
+<form action="/write" method="post">
+    <table class="write-table">
+        <tr><td>
+            <div class="write-success">
+                {{.}}
+            </div>
+        </td></tr>
+        <tr><td>
+            <label>
+                <textarea class="write-textarea" name="content" maxlength="200"></textarea>
+            </label>
+        </td></tr>
+        <tr><td>
+            <button class="write-submit" type="submit">
+                提交
+            </button>
+            <div class="write-alarm">
+                最多200个字
+            </div>
+        </td></tr>
+    </table>
+</form>
+{{template "footer.html"}}
+</body>
+</html>

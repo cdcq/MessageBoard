@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>留言审核</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/examine.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/watch.css">
+    <script type="text/javascript" src="/static/javascript/watch.js"></script>
+    <script type="text/javascript" src="/static/javascript/examine.js"></script>
+</head>
+<body>
+{{template "header.html"}}
+<script>
+    check_login()
+    display_examine_messages(1)
+</script>
+<table class="messages-table" id="messages-table">
+</table>
+<div class="watch-page-choice" id="pages-div">
+</div>
+{{template "footer.html"}}
+</body>
+</html>
