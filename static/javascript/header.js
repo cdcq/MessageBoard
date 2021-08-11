@@ -20,9 +20,8 @@ function check_login_status() {
             return 
         }
         let data = JSON.parse(res)
-        let obj = document.getElementById("login-or-user")
-        obj.innerText = data.Name
-        obj.href = "/user"
+        document.getElementById("login-or-user-text").innerText = data.Name
+        document.getElementById("login-or-user-a").href = "/user"
         if (data.Power >= 1) {
             let exam_obj = document.getElementById("header-examine")
             exam_obj.style.display = "inline"

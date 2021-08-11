@@ -11,6 +11,7 @@ import (
 	"message_board/utils/queries"
 	"net/http"
 	"strconv"
+	"syscall"
 )
 
 func addWebSocketHandlers() {
@@ -25,9 +26,10 @@ func addWebSocketHandlers() {
 }
 
 type loginStatus struct {
-	Name string
+	Name  string
 	Power int
 }
+
 func checkLoginStatus(ws *websocket.Conn) {
 	cookies := ws.Request().Cookies()
 	for _, cookie := range cookies {
@@ -76,9 +78,13 @@ func checkUserName(ws *websocket.Conn) {
 	var data string
 	for {
 		err = websocket.Message.Receive(ws, &data)
+		if err == syscall.EAGAIN {
+			err = nil
+			continue
+		}
 		if err != nil {
 			log.Println("error when websocket receive:", err)
-			continue
+			break
 		}
 		err = websocket.Message.Send(ws, checkers.CheckUserName(data, db))
 		if err != nil {
@@ -118,10 +124,17 @@ type messageData struct {
 
 func getMessages(ws *websocket.Conn) {
 	var pageS string
-	err := websocket.Message.Receive(ws, &pageS)
-	if err != nil {
-		log.Println("error when receive websocket message:", err)
-		return
+	for {
+		err := websocket.Message.Receive(ws, &pageS)
+		if err == syscall.EAGAIN {
+			err = nil
+			continue
+		}
+		if err != nil {
+			log.Println("error when receive websocket message:", err)
+			return
+		}
+		break
 	}
 	page, err := strconv.Atoi(pageS)
 	if err != nil {
@@ -138,10 +151,10 @@ func getMessages(ws *websocket.Conn) {
 	if page <= 0 || page > pageCnt {
 		return
 	}
-	if len(rows) < (page - 1) * rowsPerPage	 {
+	if len(rows) < (page-1)*rowsPerPage {
 		return
 	}
-	rows = rows[page * rowsPerPage - rowsPerPage: others.Min(len(rows), page * rowsPerPage)]
+	rows = rows[page*rowsPerPage-rowsPerPage : others.Min(len(rows), page*rowsPerPage)]
 	data := messageData{Rows: rows, PageCnt: pageCnt}
 	dataJson, err := json.Marshal(data)
 	if err != nil {
@@ -175,10 +188,17 @@ func getExamineMessages(ws *websocket.Conn) {
 		return
 	}
 	var pageS string
-	err = websocket.Message.Receive(ws, &pageS)
-	if err != nil {
-		log.Println("error when receive websocket message:", err)
-		return
+	for {
+		err = websocket.Message.Receive(ws, &pageS)
+		if err == syscall.EAGAIN {
+			err = nil
+			continue
+		}
+		if err != nil {
+			log.Println("error when receive websocket message:", err)
+			return
+		}
+		break
 	}
 	page, err := strconv.Atoi(pageS)
 	if err != nil {
@@ -195,10 +215,10 @@ func getExamineMessages(ws *websocket.Conn) {
 	if page <= 0 || page > pageCnt {
 		return
 	}
-	if len(rows) < (page - 1) * rowsPerPage	 {
+	if len(rows) < (page-1)*rowsPerPage {
 		return
 	}
-	rows = rows[page * rowsPerPage - rowsPerPage: others.Min(len(rows), page * rowsPerPage)]
+	rows = rows[page*rowsPerPage-rowsPerPage : others.Min(len(rows), page*rowsPerPage)]
 	data := messageData{Rows: rows, PageCnt: pageCnt}
 	dataJson, err := json.Marshal(data)
 	if err != nil {
@@ -234,19 +254,23 @@ func accessMessage(ws *websocket.Conn) {
 	var data string
 	for {
 		err = websocket.Message.Receive(ws, &data)
+		if err == syscall.EAGAIN {
+			err = nil
+			continue
+		}
 		if err != nil {
 			log.Println("error when websocket receive:", err)
-			continue
+			break
 		}
 		mid, err := strconv.Atoi(data)
 		if err != nil {
 			log.Println("error when turn string to int:", err)
-			return
+			break
 		}
 		err = queries.AccessMessage(mid, db)
 		if err != nil {
 			log.Println("error when access message in database:", err)
-			return
+			break
 		}
 		return
 	}
@@ -258,7 +282,7 @@ type searchNameAndPage struct {
 }
 
 type usersData struct {
-	Rows []queries.User
+	Rows    []queries.User
 	PageCnt int
 }
 
@@ -280,9 +304,13 @@ func getLowerPowerUser(ws *websocket.Conn) {
 	var dataS string
 	for {
 		err = websocket.Message.Receive(ws, &dataS)
+		if err == syscall.EAGAIN {
+			err = nil
+			continue
+		}
 		if err != nil {
 			log.Println("error when websocket receive:", err)
-			continue
+			break
 		}
 		var data searchNameAndPage
 		err = json.Unmarshal([]byte(dataS), &data)
@@ -302,10 +330,10 @@ func getLowerPowerUser(ws *websocket.Conn) {
 		if page <= 0 || page > pageCnt {
 			break
 		}
-		if len(rows) < (page - 1) * rowsPerPage	 {
+		if len(rows) < (page-1)*rowsPerPage {
 			break
 		}
-		rows = rows[page * rowsPerPage - rowsPerPage: others.Min(len(rows), page * rowsPerPage)]
+		rows = rows[page*rowsPerPage-rowsPerPage : others.Min(len(rows), page*rowsPerPage)]
 
 		resData := usersData{Rows: rows, PageCnt: pageCnt}
 		resDataJson, err := json.Marshal(resData)
@@ -323,7 +351,7 @@ func getLowerPowerUser(ws *websocket.Conn) {
 }
 
 type changePowerData struct {
-	Uid int
+	Uid   int
 	Power int
 }
 
@@ -349,9 +377,13 @@ func changeUserPower(ws *websocket.Conn) {
 	var dataS string
 	for {
 		err = websocket.Message.Receive(ws, &dataS)
+		if err == syscall.EAGAIN {
+			err = nil
+			continue
+		}
 		if err != nil {
 			log.Println("error when websocket receive:", err)
-			continue
+			break
 		}
 		err = json.Unmarshal([]byte(dataS), &data)
 		if err != nil {
